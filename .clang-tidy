@@ -1,0 +1,21 @@
+# Example .clang-tidy configuration for hl-tidy-ext.
+#
+# Usage:
+#   clang-tidy -load ./build/HlTidyModule.so -p build/ src/main.cpp
+#
+# Or place this file in your project root and clang-tidy will pick it up
+# automatically when invoked with -load.
+
+Checks: >
+  -*,
+  hl-perf-*,
+  hl-modernize-*
+
+WarningsAsErrors: ''
+
+HeaderFilterRegex: '.*'
+
+CheckOptions:
+  # Maximum vector size to suggest inplace_vector (C++26).
+  - key: hl-modernize-prefer-inplace-vector.MaxInplaceSize
+    value: 64

@@ -1,0 +1,17 @@
+"""lit configuration for hl-tidy-ext tests."""
+
+import lit.formats
+
+config.name = "hl-tidy-ext"
+config.test_format = lit.formats.ShTest(True)
+config.suffixes = [".cpp"]
+config.test_source_root = "@CMAKE_CURRENT_BINARY_DIR@"
+
+# Substitutions for test commands.
+config.substitutions.append(
+    (
+        "%clang_tidy",
+        "clang-tidy -load @CMAKE_BINARY_DIR@/HlTidyModule.so",
+    )
+)
+config.substitutions.append(("%FileCheck", "@FILECHECK_COMMAND@"))
